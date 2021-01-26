@@ -9,12 +9,14 @@ powershell -Command "$text=Get-Content generated_message_table_driven.h ;" ^
                     "$text[206]='// ' ;" ^
                     "$text| Set-Content generated_message_table_driven.h"
 
-REM disable warning: 4946
-powershell -Command "$text=Get-Content type.pb.h ;" ^
+REM disable warning: 4946 4582 4996
+powershell -Command "$text=Get-Content descriptor.h ;" ^
                     "$text[0]='#ifdef _MSC_VER' ;" ^
                     "$text[1]='#pragma warning (disable: 4946)' ;" ^
-                    "$text[2]='#endif' ;" ^
-                    "$text| Set-Content type.pb.h"
+                    "$text[2]='#pragma warning (disable: 4582)' ;" ^
+                    "$text[3]='#pragma warning (disable: 4996)' ;" ^
+                    "$text[4]='#endif' ;" ^
+                    "$text| Set-Content descriptor.h"
 
 REM build client android in MAC or WINDOWS, error: undefined bswap_16 bswap_32 bswap_64
 pushd stubs
