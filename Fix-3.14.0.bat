@@ -18,6 +18,10 @@ powershell -Command "$text=Get-Content descriptor.h ;" ^
                     "$text[4]='#endif' ;" ^
                     "$text| Set-Content descriptor.h"
 
+powershell -Command "$text=Get-Content port_def.inc ;" ^
+                    "$text[571]='#if defined(_MSC_VER)' ;" ^
+                    "$text| Set-Content port_def.inc"
+
 REM build client android in MAC or WINDOWS, error: undefined bswap_16 bswap_32 bswap_64
 pushd stubs
     powershell -Command "$text=Get-Content port.h ;" ^
